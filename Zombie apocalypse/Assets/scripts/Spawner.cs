@@ -11,13 +11,32 @@ public class Spawner : MonoBehaviour
     float Gametime = 0;
     int SpawnCount = 1;
     float spawnTime = 0.2f;// for example: 0.2 means spawn every 0.2s (at once)
+    int howManyZombiesSpawn;
     private void Start()
     {
+        if (PlayerPrefs.GetInt("difficulty") == 1)
+        {
+            spawnTime = 0.2f;
+            howManyZombiesSpawn = 3;
+        }
+        else if (PlayerPrefs.GetInt("difficulty") == 2)
+        {
+            spawnTime = 0.1f;
+            howManyZombiesSpawn = 6;
+        }
+        else 
+        {
+            spawnTime = 0.1f;
+            howManyZombiesSpawn = 8;
+        }
 
     }
     void Update()
     {
-        SpawnZombie();
+        for  (int i=0;i< howManyZombiesSpawn;i++)
+        {
+            SpawnZombie();
+        }
     }
 
     private void SpawnZombie()
