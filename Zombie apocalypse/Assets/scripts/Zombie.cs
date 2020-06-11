@@ -7,18 +7,30 @@ public class Zombie : MonoBehaviour
 {
     Vector3 startPosition;
     public GameObject Player;
+    public GameObject Enemy;
     Vector3 PlayerPosition;
     float ZombieVelocity = 0.3f;// in unit/s
-
+    int HP = 100;
     void Start()
     {
         startPosition = transform.position;
         PlayerPosition = Player.transform.position;
     }
 
-    // Update is called once per frame
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.name == "player")
+        {
+            HP = 0;
+        }
+    }
+
     void Update()
     {
+        if (HP == 0)
+        {
+            Destroy(Enemy);
+        }
         Rigidbody rigidbody = transform.GetComponent<Rigidbody>();
         Vector3 NewVelocity = Vector3.zero;
         float DistanceX = Player.transform.position.x - transform.position.x;
