@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEditor.VersionControl;
 using UnityEngine;
 
-public class player : MonoBehaviour
+public class playerController : MonoBehaviour
 {
     // Start is called before the first frame update
     int HP;
     private Camera MainCamera;
+    public gunController theGun;
     void Start()
     {
         SetHP();
@@ -53,7 +54,12 @@ public class player : MonoBehaviour
         if (groundPlane.Raycast(cameraRay,out rayLength))
         {
             Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-            transform.LookAt(pointToLook);
+            transform.LookAt(new Vector3(pointToLook.x,transform.position.y,pointToLook.z));
         }
+
+        if (Input.GetMouseButton(0))
+            theGun.isFiring = true;
+        if (Input.GetMouseButtonUp(0))
+            theGun.isFiring = false;
     }
 }
