@@ -64,12 +64,6 @@ public class Zombie : MonoBehaviour
         if (minusZ)
             NewVelocity.z = -NewVelocity.z;
 
-       // Debug.Log("DistanceX=" + DistanceX + " ,NewVelocity.x=" + NewVelocity.x);
-
-
-        Debug.Log(rigidbody.velocity.magnitude);
-
-        //rigidbody.position = Vector3.Lerp(startPosition, PlayerPosition,0.2f);
         rigidbody.velocity = NewVelocity;
 
     }

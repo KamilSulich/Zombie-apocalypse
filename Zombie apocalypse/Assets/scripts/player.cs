@@ -7,9 +7,11 @@ public class player : MonoBehaviour
 {
     // Start is called before the first frame update
     int HP;
+    private Camera MainCamera;
     void Start()
     {
         SetHP();
+        MainCamera = FindObjectOfType<Camera>();
     }
 
     private void SetHP()
@@ -42,7 +44,16 @@ public class player : MonoBehaviour
         if (HP <= 0)
         {
             //player die
+        }
 
+        Ray cameraRay = MainCamera.ScreenPointToRay(Input.mousePosition);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        float rayLength;
+
+        if (groundPlane.Raycast(cameraRay,out rayLength))
+        {
+            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
+            transform.LookAt(pointToLook);
         }
     }
 }
